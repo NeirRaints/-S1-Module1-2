@@ -20,3 +20,13 @@ html {
 body {
   margin-bottom: 60px;
 }
+
+.form-group {
+    margin-bottom: 10px;
+}
+
+.additionally-column {
+    max-width: 250px; /* примерный максимальный размер столбца */
+    word-wrap: normal;
+    word-break: normal;
+}

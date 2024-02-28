@@ -1,0 +1,115 @@
+﻿@using ClinicBigBoarsWeb.Data.Enum
+@model ClinicBigBoarsWeb.Models.Patient
+
+@{
+    ViewData["Title"] = "Создать";
+}
+
+<h1>Создать</h1>
+
+<h4>Пациент</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Photo" class="control-label"></label>
+                <input asp-for="Photo" class="form-control" />
+                <span asp-validation-for="Photo" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Name" class="control-label"></label>
+                <input asp-for="Name" class="form-control" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Surname" class="control-label"></label>
+                <input asp-for="Surname" class="form-control" />
+                <span asp-validation-for="Surname" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="MiddleName" class="control-label"></label>
+                <input asp-for="MiddleName" class="form-control" />
+                <span asp-validation-for="MiddleName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="PassportNumSerial" class="control-label"></label>
+                <input asp-for="PassportNumSerial" class="form-control" />
+                <span asp-validation-for="PassportNumSerial" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Birthday" class="control-label"></label>
+                <input asp-for="Birthday" class="form-control" />
+                <span asp-validation-for="Birthday" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Gender" class="control-label"></label>
+                <select asp-for="Gender" asp-items="@Html.GetEnumSelectList<GenderType>()" class="form-control"></select>
+                <span asp-validation-for="Gender" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Address" class="control-label"></label>
+                <input asp-for="Address" class="form-control" />
+                <span asp-validation-for="Address" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="PhoneNumber" class="control-label"></label>
+                <input asp-for="PhoneNumber" class="form-control" />
+                <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="EmailAddress" class="control-label"></label>
+                <input asp-for="EmailAddress" class="form-control" />
+                <span asp-validation-for="EmailAddress" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="MedCardNum" class="control-label"></label>
+                <input asp-for="MedCardNum" class="form-control" />
+                <span asp-validation-for="MedCardNum" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="MedCardDate" class="control-label"></label>
+                <input asp-for="MedCardDate" class="form-control" />
+                <span asp-validation-for="MedCardDate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="LastVizitDate" class="control-label"></label>
+                <input asp-for="LastVizitDate" class="form-control" />
+                <span asp-validation-for="LastVizitDate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="NextVizitDate" class="control-label"></label>
+                <input asp-for="NextVizitDate" class="form-control" />
+                <span asp-validation-for="NextVizitDate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="PolisNum" class="control-label"></label>
+                <input asp-for="PolisNum" class="form-control" />
+                <span asp-validation-for="PolisNum" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="PolisDate" class="control-label"></label>
+                <input asp-for="PolisDate" class="form-control" />
+                <span asp-validation-for="PolisDate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Diagnose" class="control-label"></label>
+                <input asp-for="Diagnose" class="form-control" />
+                <span asp-validation-for="Diagnose" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="MedicalHistory" class="control-label"></label>
+                <input asp-for="MedicalHistory" class="form-control" />
+                <span asp-validation-for="MedicalHistory" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Создать" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

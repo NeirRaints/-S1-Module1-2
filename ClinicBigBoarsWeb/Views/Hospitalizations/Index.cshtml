@@ -1,0 +1,77 @@
+﻿@model IEnumerable<ClinicBigBoarsWeb.Models.Hospitalization>
+
+@{
+    ViewData["Title"] = "Госпитализация";
+}
+
+<h1>Госпитализация</h1>
+
+<p>
+    <a asp-action="Create">Добавить запись</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.PatientId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.HospitalizationCode)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AppointedDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.HospitalizationObj)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Department)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Conditions)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DeadlineDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Additionally)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.PatientId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.HospitalizationCode)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AppointedDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.HospitalizationObj)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Department)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Conditions)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DeadlineDate)
+            </td>
+            <td class="additionally-column">
+                @Html.DisplayFor(modelItem => item.Additionally)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.HospitalizationId">Редактировать</a> |
+                <a asp-action="Details" asp-route-id="@item.HospitalizationId">Подробно</a> |
+                <a asp-action="Delete" asp-route-id="@item.HospitalizationId">Удалить</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

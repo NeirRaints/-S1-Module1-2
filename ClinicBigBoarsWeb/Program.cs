@@ -1,4 +1,9 @@
+﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
+using ClinicBigBoarsWeb.Data;
 var builder = WebApplication.CreateBuilder(args);
+builder.Services.AddDbContext<ClinicBigBoarsWebContext>(options =>
+    options.UseSqlServer(builder.Configuration.GetConnectionString("ClinicBigBoarsWebContext") ?? throw new InvalidOperationException("Connection string 'ClinicBigBoarsWebContext' not found.")));
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
