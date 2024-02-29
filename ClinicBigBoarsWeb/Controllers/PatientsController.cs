@@ -9,6 +9,8 @@ using ClinicBigBoarsWeb.Data;
 using ClinicBigBoarsWeb.Models;
 using System.Drawing.Imaging;
 using QRCoder;
+using System.Drawing;
+using System.IO;
 
 
 namespace ClinicBigBoarsWeb.Controllers
@@ -38,6 +40,7 @@ namespace ClinicBigBoarsWeb.Controllers
 
             var patient = await _context.Patient
                 .FirstOrDefaultAsync(m => m.PatientId == id);
+
             if (patient == null)
             {
                 return NotFound();
@@ -167,5 +170,17 @@ namespace ClinicBigBoarsWeb.Controllers
         {
             return _context.Patient.Any(e => e.PatientId == id);
         }
+
+        public IActionResult GenerateQRCode(int id)
+        {
+            var url = $"{Request.Scheme}://{Request.Host}/Patients/Details/{id}";
+
+            QRCodeGenerator qrGenerator = new QRCodeGenerator();
+            QRCodeData qrCodeData = qrGenerator.CreateQrCode(url, QRCodeGenerator.ECCLevel.L);
+            byte[] qrCodeBytes = new PngByteQRCode(qrCodeData).GetGraphic(2);
+
+            return File(qrCodeBytes, "image/png");
+        }
+
     }
 }

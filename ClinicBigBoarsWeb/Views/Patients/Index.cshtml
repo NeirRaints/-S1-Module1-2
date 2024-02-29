@@ -56,7 +56,8 @@
                     @Html.DisplayFor(modelItem => item.NextVizitDate)
                 </td>
                 <td>
-                    <a asp-action="Details" asp-route-id="@item.PatientId">Подробно</a>
+                    <!-- Генерация QR-кода с ссылкой на страницу Details -->
+                    <img src="@Url.Action("GenerateQRCode", new { id = item.PatientId })" alt="QR Code"/>
                 </td>
             </tr>
         }
