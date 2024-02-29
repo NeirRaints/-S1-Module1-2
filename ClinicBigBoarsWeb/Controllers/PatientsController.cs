@@ -7,6 +7,9 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using ClinicBigBoarsWeb.Data;
 using ClinicBigBoarsWeb.Models;
+using System.Drawing.Imaging;
+using QRCoder;
+
 
 namespace ClinicBigBoarsWeb.Controllers
 {
@@ -56,6 +59,11 @@ namespace ClinicBigBoarsWeb.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("PatientId,Photo,Name,Surname,MiddleName,PassportNumSerial,Birthday,Gender,Address,PhoneNumber,EmailAddress,MedCardNum,MedCardDate,LastVizitDate,NextVizitDate,PolisNum,PolisDate,Diagnose,MedicalHistory")] Patient patient)
         {
+            if (_context.Patient.Any(p => p.PolisNum == patient.PolisNum))
+            {
+                ModelState.AddModelError("PolisNum", "Пациент с таким номером уже существует.");
+            }
+
             if (ModelState.IsValid)
             {
                 _context.Add(patient);
@@ -92,6 +100,11 @@ namespace ClinicBigBoarsWeb.Controllers
             if (id != patient.PatientId)
             {
                 return NotFound();
+            }
+
+            if (_context.Patient.Any(p => p.PolisNum == patient.PolisNum))
+            {
+                ModelState.AddModelError("PolisNum", "Пациент с таким номером уже существует.");
             }
 
             if (ModelState.IsValid)

@@ -8,32 +8,40 @@ namespace ClinicBigBoarsWeb.Models
     {
         [Key]
         public int HospitalizationId { get; set; }
-        [ForeignKey(nameof(Patient))]
+
+        [ForeignKey(nameof(PatientId))]
         [Display(Name = "Код Пациента")]
         [Required(ErrorMessage = "Поле обязательно для заполнения")]
-        public required int PatientId { get; set; }
+        public int PatientId { get; set; }
+
         [ForeignKey(nameof(HospitalizationCode))]
-        [Display(Name = "Код госпиталицазии")]
+        [Display(Name = "Код госпитализации")]
         [Required(ErrorMessage = "Поле обязательно для заполнения")]
-        public required int HospitalizationCode { get; set; }
+        public int HospitalizationCode { get; set; }
+
         [DataType(DataType.DateTime)]
         [Display(Name = "Назначенное дата и время")]
         [Required(ErrorMessage = "Поле обязательно для заполнения")]
-        public required DateTime AppointedDate { get; set; }
+        public DateTime AppointedDate { get; set; }
+
         [Display(Name = "Цель госпитализации")]
         [Required(ErrorMessage = "Поле обязательно для заполнения")]
         public required string HospitalizationObj { get; set; }
+
         [Display(Name = "Отделение")]
         [Required(ErrorMessage = "Поле обязательно для заполнения")]
         public required string Department { get; set; }
+
         [Display(Name = "Условия")]
         [Required(ErrorMessage = "Поле обязательно для заполнения")]
-        public required ConditionsType Conditions { get; set; }
+        public ConditionsType Conditions { get; set; }
+
         [DataType(DataType.Date)]
         [Display(Name = "Сроки")]
         [Required(ErrorMessage = "Поле обязательно для заполнения")]
-        public required DateTime DeadlineDate { get; set; }
+        public DateTime DeadlineDate { get; set; }
+
         [Display(Name = "Дополнительно")]
-        public string? Additionally {  get; set; }
+        public string? Additionally { get; set; }
     }
 }
