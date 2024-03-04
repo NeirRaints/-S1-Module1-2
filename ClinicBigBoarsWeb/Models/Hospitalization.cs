@@ -1,4 +1,5 @@
 ﻿using ClinicBigBoarsWeb.Data.Enum;
+using Microsoft.Identity.Client;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 

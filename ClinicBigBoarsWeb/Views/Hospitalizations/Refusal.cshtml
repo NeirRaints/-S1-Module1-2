@@ -1,0 +1,16 @@
+﻿@model ClinicBigBoarsWeb.Models.ViewModels.RefusalViewModel
+
+@{
+    ViewData["Title"] = "Отказ";
+}
+
+<h1>Отказ</h1>
+
+<form asp-action="Refusal" method="post">
+    <div class="form-group">
+        <label asp-for="RefusalReason">Причина отказа от госпитализации:</label>
+        <input asp-for="RefusalReason" class="form-control" />
+        <input type="hidden" asp-for="HospitalizationId" />
+    </div>
+    <button type="submit" class="btn btn-primary">Отправить</button>
+</form>

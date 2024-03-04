@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using ClinicBigBoarsWeb.Data;
 using ClinicBigBoarsWeb.Models;
+using ClinicBigBoarsWeb.Models.ViewModels;
 
 namespace ClinicBigBoarsWeb.Controllers
 {
@@ -20,9 +21,17 @@ namespace ClinicBigBoarsWeb.Controllers
         }
 
         // GET: Hospitalizations
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(int? hospitalizationCode)
         {
-            return View(await _context.Hospitalization.ToListAsync());
+            var hospitalizations = _context.Hospitalization.AsQueryable();
+
+            if (hospitalizationCode != null)
+            {
+                hospitalizations = hospitalizations.Where(h => h.HospitalizationCode == hospitalizationCode);
+            }
+
+
+            return View(await hospitalizations.ToListAsync());
         }
 
         // GET: Hospitalizations/Details/5
@@ -152,6 +161,56 @@ namespace ClinicBigBoarsWeb.Controllers
         private bool HospitalizationExists(int id)
         {
             return _context.Hospitalization.Any(e => e.HospitalizationId == id);
+        }
+
+        // GET: Hospitalizations/Refusal/5
+        public async Task<IActionResult> Refusal(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var hospitalization = await _context.Hospitalization.FindAsync(id);
+            if (hospitalization == null)
+            {
+                return NotFound();
+            }
+
+            var refusalViewModel = new RefusalViewModel
+            {
+                HospitalizationId = hospitalization.HospitalizationId
+            };
+
+            return View(refusalViewModel);
+        }
+
+        // POST: Hospitalizations/Refusal/5
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Refusal(int id, RefusalViewModel refusalViewModel)
+        {
+            if (id != refusalViewModel.HospitalizationId)
+            {
+                return NotFound();
+            }
+
+            if (ModelState.IsValid)
+            {
+                var hospitalization = await _context.Hospitalization.FindAsync(id);
+                if (hospitalization != null)
+                {
+                    if(refusalViewModel.RefusalReason != null) 
+                    { hospitalization.Additionally = $"Отказ от госпитализации: \"{refusalViewModel.RefusalReason}\"";}
+                    else { hospitalization.Additionally = "Отказ от госпитализации"; }
+                    _context.Update(hospitalization);
+                    await _context.SaveChangesAsync();
+
+                    return RedirectToAction(nameof(Index));
+                }
+            }
+
+            return View(refusalViewModel);
         }
     }
 }
