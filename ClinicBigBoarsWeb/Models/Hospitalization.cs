@@ -23,6 +23,7 @@ namespace ClinicBigBoarsWeb.Models
         [DataType(DataType.DateTime)]
         [Display(Name = "Назначенное дата и время")]
         [Required(ErrorMessage = "Поле обязательно для заполнения")]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd HH:mm}", ApplyFormatInEditMode = true)]
         public DateTime AppointedDate { get; set; }
 
         [Display(Name = "Цель госпитализации")]
